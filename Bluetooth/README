@@ -1,0 +1,22 @@
+README
+======
+
+This README file indtroduces Bluetooth Classic (BR/EDR) simple examples with BlueZ stack in Linux OS.
+The simple examples consist of the followings:
+- btscan: inquiring nearby Bluetooth devices and displaying their BDADDR and user-friendly names. 
+- rfcomm-server:
+	Binding Bluetooth RFCOMM socket to local Bluetooth adapter and waiting for connection from remote. 
+	RFCOMM_SERVER_PORT_NUM and RFCOMM_SERVER_BLUETOOTH_ADDR defined in rfcomm_socket.h should be modified in your test environment. 
+- rfcomm-client: 
+	Connecting to remote Bluetooth server with specified RFCOMM_SERVER_BLUETOOTH_ADDR. Then, send test messages. 
+- l2cap-server: 
+	Binding Bluetooth L2CAP socket to local Bluetooth adapter and waiting for connection from remote. 
+	L2CAP_SERVER_PORT_NUM and L2CAP_SERVER_BLUETOOTH_ADDR defined in rfcomm_socket.h should be modified in your test environment. 
+- l2cap-client:
+	Connecting to remote Bluetooth server with specified L2CAP_SERVER_BLUETOOTH_ADDR. Then, send test messages. 
+- sdp-register: connecting to SDP server in local adapter and registering service classes. The servie id is defined in sdp_test.h.
+- sdp-search: connecting to remote SDP server with specified SDP_SERVER_BLUETOOTH_ADDR and searching for RFCOMM_UUID to get the correct port number.
+
+This simple examples are under GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
+any later version.
+
