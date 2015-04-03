@@ -1,7 +1,11 @@
+prefix=/usr/local/BlueZ-5.29
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
 
 CC=$(CROSS_COMPILE)gcc
 STRIP=$(CROSS_COMPILE)strip
-INC = -I.
+INC = -I. -I${includedir}
 CFLAGS=	-g -O2 -Wall $(INC) 
 
 BTSCAN_OBJ=btscan.o
@@ -30,25 +34,25 @@ ALL=btscan rfcomm-server rfcomm-client l2cap-server l2cap-client sdp-search sdp-
 all: $(ALL)
 
 btscan: $(BTSCAN_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(BTSCAN_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(BTSCAN_SRC) -L${libdir} -lbluetooth
 
 rfcomm-server: $(RFCOMM-SERVER_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(RFCOMM-SERVER_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(RFCOMM-SERVER_SRC) -L${libdir} -lbluetooth
 
 rfcomm-client: $(RFCOMM-CLIENT_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(RFCOMM-CLIENT_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(RFCOMM-CLIENT_SRC) -L${libdir} -lbluetooth
 
 l2cap-server: $(L2CAP-SERVER_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(L2CAP-SERVER_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(L2CAP-SERVER_SRC) -L${libdir} -lbluetooth
 
 l2cap-client: $(L2CAP-CLIENT_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(L2CAP-CLIENT_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(L2CAP-CLIENT_SRC) -L${libdir} -lbluetooth
 
 sdp-search: $(SDP-SEARCH_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(SDP-SEARCH_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(SDP-SEARCH_SRC) -L${libdir} -lbluetooth
 
 sdp-register: $(SDP-REGISTER_OBJ)
-	$(CC) -o $@ $(CFLAGS) $(SDP-REGISTER_SRC) -lbluetooth
+	$(CC) -o $@ $(CFLAGS) $(SDP-REGISTER_SRC) -L${libdir} -lbluetooth
 
 new:
 	$(MAKE) clean
