@@ -1,7 +1,7 @@
 README
 ======
 
-This README file indtroduces Bluetooth Classic (BR/EDR) simple examples with BlueZ stack in Linux OS.
+This README file introduces Bluetooth Classic (BR/EDR) simple examples with BlueZ stack in Linux OS.
 The simple examples consist of the followings:
 - btscan: inquiring nearby Bluetooth devices and displaying their BDADDR and user-friendly names. 
 - rfcomm-server:

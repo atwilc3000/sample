@@ -1,7 +1,7 @@
 README
 ======
 
-This README file indtroduces WLAN simple examples with ATWILC3000 in Linux OS.
+This README file introduces WLAN simple examples with ATWILC3000 in Linux OS.
 The simple examples consist of the followings:
 - udp-server 
 - udp-client
@@ -10,6 +10,11 @@ The simple examples consist of the followings:
 - location-client
 - weather-client
 - ntp-client
+
+How to build
+-------------
+Issue the followings to build samples for SAMA5D3-XPLD Linux platform.
+make CROSS_COMPILE=arm-linux-gnueabihf-
 
 This simple examples are under GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
 any later version.

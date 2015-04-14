@@ -1,5 +1,5 @@
 /* 
- * RFCOMM client for Linux by using BlueZ
+ * RFCOMM Client for Linux by using BlueZ
  * Copyright (C) 2015 by Tony Cho
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,30 +25,30 @@
 
 int main(int argc, char **argv)
 {
-    struct sockaddr_rc addr = { 0 };
-    int sock;
+	struct sockaddr_rc addr = { 0 };
+	int sock;
 	const char *sample_text = "RFCOMM Simple Example Done";
 
 	printf("Start Bluetooth RFCOMM client, server addr %s\n", RFCOMM_SERVER_BLUETOOTH_ADDR);
-    /* allocate a socket */
-    sock = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+	/* allocate a socket */
+	sock = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 
-    /* set the outgoing connection parameters, server's address and port number */
-    addr.rc_family = AF_BLUETOOTH;								/* Addressing family, always AF_BLUETOOTH */
-    addr.rc_channel = RFCOMM_SERVER_PORT_NUM;					/* server's port number */
-    str2ba(RFCOMM_SERVER_BLUETOOTH_ADDR, &addr.rc_bdaddr); 		/* server's Bluetooth Address */
+	/* set the outgoing connection parameters, server's address and port number */
+	addr.rc_family = AF_BLUETOOTH;								/* Addressing family, always AF_BLUETOOTH */
+	addr.rc_channel = RFCOMM_SERVER_PORT_NUM;						/* server's port number */
+	str2ba(RFCOMM_SERVER_BLUETOOTH_ADDR, &addr.rc_bdaddr); 					/* server's Bluetooth Address */
 
-    /* connect to server with destination address and port */
-    if(connect(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+	/* connect to server with destination address and port */
+	if(connect(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
 		perror("failed to connect");
 		exit(1);
-    }
+	}
 
-    /* send a message */
+	/* send a message */
 	printf("connected...\n");
-  	send(sock, sample_text, strlen(sample_text), 0);
-    
-    close(sock);
-    return 0;
+	send(sock, sample_text, strlen(sample_text), 0);
+
+	close(sock);
+	return 0;
 }
 

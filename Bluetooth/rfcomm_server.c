@@ -1,5 +1,5 @@
 /* 
- * RFCOMM server for Linux by using BlueZ
+ * RFCOMM Server for Linux by using BlueZ
  * Copyright (C) 2015 by Tony Cho
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,20 +25,20 @@
 
 int main(int argc, char **argv)
 {
-    struct sockaddr_rc loc_addr = { 0 };	/* local bluetooth adapter's info */
+	struct sockaddr_rc loc_addr = { 0 };	/* local bluetooth adapter's info */
 	struct sockaddr_rc client_addr = { 0 };	/* filled in with remote (client) bluetooth device's info */
-    char buf[1024] = { 0 };
-    int server_sock, client_sock, bytes_read;
-    unsigned int opt = sizeof(client_addr);
+	char buf[1024] = { 0 };
+	int server_sock, client_sock, bytes_read;
+	unsigned int opt = sizeof(client_addr);
 
 	printf("Start Bluetooth RFCOMM server...\n");
 
 	/* allocate socket */
-    server_sock = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
+	server_sock = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 
-    loc_addr.rc_family = AF_BLUETOOTH;					/* Addressing family, always AF_BLUETOOTH */
-	bacpy(&loc_addr.rc_bdaddr, BDADDR_ANY);				/* Bluetooth address of local bluetooth adapter */
-    loc_addr.rc_channel = RFCOMM_SERVER_PORT_NUM;		/* port number of local bluetooth adapter */
+	loc_addr.rc_family = AF_BLUETOOTH;		/* Addressing family, always AF_BLUETOOTH */
+	bacpy(&loc_addr.rc_bdaddr, BDADDR_ANY);		/* Bluetooth address of local bluetooth adapter */
+	loc_addr.rc_channel = RFCOMM_SERVER_PORT_NUM;	/* port number of local bluetooth adapter */
 
 	printf("binding\n");
 	if(bind(server_sock, (struct sockaddr *)&loc_addr, sizeof(loc_addr)) < 0) {
@@ -47,25 +47,25 @@ int main(int argc, char **argv)
 	}
 
 	printf("listening\n");
-    /* put socket into listening mode */
-    listen(server_sock, 1);		/* backlog is one */
-	
-    /* accept one connection */
-    client_sock = accept(server_sock, (struct sockaddr *)&client_addr, &opt);		/* return new socket for connection with a client */
+	/* put socket into listening mode */
+	listen(server_sock, 1);		/* backlog is one */
 
-    ba2str( &client_addr.rc_bdaddr, buf );
-    printf("connected from %s\n", buf);
+	/* accept one connection */
+	client_sock = accept(server_sock, (struct sockaddr *)&client_addr, &opt);	/* return new socket for connection with a client */
 
-    /* read data from the client */
+	ba2str( &client_addr.rc_bdaddr, buf );
+	printf("connected from %s\n", buf);
+
+	/* read data from the client */
 	memset(buf, 0, sizeof(buf));
-    bytes_read = recv(client_sock, buf, sizeof(buf), 0);
-    if( bytes_read > 0 ) {
-    	printf("received [%s]\n", buf);
-    }
+	bytes_read = recv(client_sock, buf, sizeof(buf), 0);
+	if( bytes_read > 0 ) {
+		printf("received [%s]\n", buf);
+	}
 
-    /* close connection */
-    close(client_sock);
-    close(server_sock);
-    return 0;
+	/* close connection */
+	close(client_sock);
+	close(server_sock);
+	return 0;
 }
 
