@@ -10,6 +10,7 @@ The simple examples consist of the followings:
 - location-client
 - weather-client
 - ntp-client
+- smtp-client
 
 How to build
 -------------
