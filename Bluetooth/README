@@ -17,6 +17,19 @@ The simple examples consist of the followings:
 - sdp-register: connecting to SDP server in local adapter and registering service classes. The servie id is defined in sdp_test.h.
 - sdp-search: connecting to remote SDP server with specified SDP_SERVER_BLUETOOTH_ADDR and searching for RFCOMM_UUID to get the correct port number.
 
+How to build
+-------------
+Issue the followings to build samples for SAMA5D3-XPLD Linux platform.
+make CROSS_COMPILE=arm-linux-gnueabihf-
+
+Notice
+-------
+Run bluetooth daemon by issuing the following command before excuting sdp-register in SAMA5D3 Xplained Linux board.
+# ./bluetoothd &
+
 This simple examples are under GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
 any later version.
+
+
+
 
